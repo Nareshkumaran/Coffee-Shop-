@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Feel Good Coffee</h1>
+<div class="row">
+    {% for coffee in coffee %}
+    <div class="col">
+        <div class="card" style="width: 18rem;">
+            <img src="{{ coffee.image }}" class="card-img-top" height="230x" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ coffee.name }}</h5>
+                <p class="card-text">${{ coffee.price }}</p>
+                <a href="#" class="btn btn-primary addToCartBtn" data-coffee-id="{{ coffee.id }}">Add to cart</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get all 'Add to cart' buttons and attach click event listeners
+        var addToCartButtons = document.querySelectorAll('.addToCartBtn');
+        
+        addToCartButtons.forEach(function(button) {
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+
+                // Get coffee ID from data attribute
+                var coffeeId = this.getAttribute('data-coffee-id');
+
+                // Confirm dialog
+                if (confirm('Are you sure you want to add this item to your cart?')) {
+                    // Simulate adding to cart (replace with actual logic)
+                    alert('Item added to cart successfully.'); // This can be replaced with actual AJAX call to add item to cart
+                    
+                    // Example of redirecting to a cart page
+                    window.location.href = '#'; // Replace with your actual cart URL
+                } else {
+                    console.log('User cancelled adding to cart.');
+                }
+            });
+        });
+    });
+</script>
+
+{% endblock %}
